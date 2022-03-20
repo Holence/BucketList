@@ -22,6 +22,7 @@ class MainSession(DTSession.DTMainSession):
         self.addAction(self.mainwindow.actionAdd_ToDo)
         self.addAction(self.mainwindow.actionExport_to_Json)
         self.addAction(self.mainwindow.actionCheck_Data_Completeness)
+        self.addAction(self.mainwindow.actionSearch_ToDo)
         
         self.actionSort_list=[
             QAction("Seperate by Status",checkable=True),
@@ -61,6 +62,7 @@ class MainSession(DTSession.DTMainSession):
     
     def initializeMenu(self):
         self.addActionToMainMenu(self.mainwindow.actionAdd_ToDo)
+        self.addActionToMainMenu(self.mainwindow.actionSearch_ToDo)
 
         self.menuSort=QMenu("Sort")
         self.menuSort.setIcon(IconFromCurrentTheme("bar-chart-2.svg"))

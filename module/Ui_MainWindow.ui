@@ -126,6 +126,14 @@
     <enum>Qt::ApplicationShortcut</enum>
    </property>
   </action>
+  <action name="actionSearch_ToDo">
+   <property name="text">
+    <string>Search ToDo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

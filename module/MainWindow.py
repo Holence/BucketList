@@ -61,6 +61,9 @@ class MainWindow(Ui_MainWindow,QWidget):
 
         self.actionCheck_Data_Completeness.triggered.connect(self.checkDataCompleteness)
         self.actionCheck_Data_Completeness.setIcon(IconFromCurrentTheme("shield.svg"))
+
+        self.actionSearch_ToDo.triggered.connect(self.searchToDo)
+        self.actionSearch_ToDo.setIcon(IconFromCurrentTheme("search.svg"))
     
     def addToDo(self):
         dlg=DTFrame.DTDialog(self,"Add ToDo")
@@ -433,3 +436,17 @@ class MainWindow(Ui_MainWindow,QWidget):
         
         self.DataChecker.showNormal()
         self.DataChecker.raise_()
+    
+    def searchToDo(self):
+        def slot():
+            del self.search_ToDo_window
+        
+        if hasattr(self,"search_ToDo_window"):
+            self.search_ToDo_window.raise_()
+            self.search_ToDo_window.setFocus()
+            return
+        
+        from session import SearchToDoSession
+        self.search_ToDo_window=SearchToDoSession(self.Headquarter.app,self.Headquarter)
+        self.search_ToDo_window.closed.connect(slot)
+        self.search_ToDo_window.show()

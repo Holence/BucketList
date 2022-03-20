@@ -10,8 +10,9 @@ class Block(Ui_Block,QWidget):
         self.index=index
     
         color=self.Headquarter.app.color_list[0]
+        color2=self.Headquarter.app.color_list[1]
         self.label_status.setStyleSheet("min-height:44px; max-height:44px; min-width:44px; max-width:44px; border-bottom: 2px ridge %s"%color)
-        self.label_text.setStyleSheet("font-size:16pt; border:5px ridge %s;"%color)
+        self.label_text.setStyleSheet("font-size:16pt; border:5px ridge %s; background: %s;"%(color,color2)) # 为什么不加上background，就显示不出markdown的分割线？？
         self.pushButton_edit.setStyleSheet("background:%s; border:none; min-height:20px; max-height:20px; min-width:20px; max-width:20px; icon-size:16px;"%self.Headquarter.app.color_list[2])
         self.pushButton_edit.setIcon(IconFromCurrentTheme("edit-3.svg"))
         self.label_tags.setStyleSheet(f"border-left: 5px ridge {color}; font-size:12pt;")

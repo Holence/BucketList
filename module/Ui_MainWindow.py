@@ -25,6 +25,8 @@ class Ui_MainWindow(object):
         self.actionCheck_Data_Completeness = QAction(MainWindow)
         self.actionCheck_Data_Completeness.setObjectName(u"actionCheck_Data_Completeness")
         self.actionCheck_Data_Completeness.setShortcutContext(Qt.ApplicationShortcut)
+        self.actionSearch_ToDo = QAction(MainWindow)
+        self.actionSearch_ToDo.setObjectName(u"actionSearch_ToDo")
         self.verticalLayout = QVBoxLayout(MainWindow)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
@@ -92,6 +94,10 @@ class Ui_MainWindow(object):
         self.actionCheck_Data_Completeness.setText(QCoreApplication.translate("MainWindow", u"Check Data Completeness", None))
 #if QT_CONFIG(shortcut)
         self.actionCheck_Data_Completeness.setShortcut(QCoreApplication.translate("MainWindow", u"F4", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionSearch_ToDo.setText(QCoreApplication.translate("MainWindow", u"Search ToDo", None))
+#if QT_CONFIG(shortcut)
+        self.actionSearch_ToDo.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+F", None))
 #endif // QT_CONFIG(shortcut)
     # retranslateUi
 
