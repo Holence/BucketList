@@ -6,7 +6,7 @@ class MainSession(DTSession.DTMainSession):
 
         self.status_type=["🚄","☕","⌚","✔","❌"]
         self.status_list=[True,True,True,True,True]
-        self.sorting_type=None
+        self.sorting_type=2
         self.seperate_status=True
 
     def initializeWindow(self):
@@ -47,15 +47,21 @@ class MainSession(DTSession.DTMainSession):
             self.mainwindow.refreshPage()
             
         self.actionSort_list[0].triggered.connect(lambda:slot(0))
-        self.actionSort_list[0].setChecked(True)
         self.actionSort_list[0].setIcon(IconFromCurrentTheme("align-left.svg"))
+        self.actionSort_list[0].setChecked(True)
+        self.seperate_status=True
 
         self.actionSort_list[1].triggered.connect(lambda:slot(1))
         self.actionSort_list[1].setIcon(IconFromCurrentTheme("chevrons-up.svg"))
+
         self.actionSort_list[2].triggered.connect(lambda:slot(2))
         self.actionSort_list[2].setIcon(IconFromCurrentTheme("chevrons-down.svg"))
+        self.actionSort_list[2].setChecked(True)
+        self.sorting_type=2
+
         self.actionSort_list[3].triggered.connect(lambda:slot(3))
         self.actionSort_list[3].setIcon(IconFromCurrentTheme("chevrons-up.svg"))
+        
         self.actionSort_list[4].triggered.connect(lambda:slot(4))
         self.actionSort_list[4].setIcon(IconFromCurrentTheme("chevrons-down.svg"))
 
