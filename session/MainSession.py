@@ -87,18 +87,18 @@ class MainSession(DTSession.DTMainSession):
         
         data_dir=os.path.join(self.app.DataDir(),"data.dlcw")
         if os.path.exists(data_dir):
-            self.data=Fernet_Decrypt_Load(self.password(),data_dir)
+            self.data=Symmetric_Decrypt_Load(self.password(),data_dir)
             if self.data==False:
                 DTFrame.DTMessageBox(self,"Error","Data error!")
                 self.app.quit()
         else:
             self.data=[]
-            Fernet_Encrypt_Save(self.password(),self.data,data_dir)
+            Symmetric_Encrypt_Save(self.password(),self.data,data_dir)
     
     def saveData(self):
         try:
             data_dir=os.path.join(self.app.DataDir(),"data.dlcw")
-            Fernet_Encrypt_Save(self.password(), self.data, data_dir)
+            Symmetric_Encrypt_Save(self.password(), self.data, data_dir)
         except Exception as e:
             self.app.showMessage("Error","Error occured during Data Saving!\n\n%s"%e,DTIcon.Error())
 

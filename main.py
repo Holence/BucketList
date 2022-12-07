@@ -5,7 +5,7 @@ app=DTAPP(sys.argv)
 
 app.setWindowIcon(DTIcon.HoloIcon2())
 app.setApplicationName("Bucket List")
-app.setApplicationVersion("1.0.0.3 build with DTPySide %s"%importlib.metadata.version('DTPySide'))
+app.setApplicationVersion("1.0.0.4 build with DTPySide %s"%importlib.metadata.version('DTPySide'))
 app.setAuthor("鍵山狐")
 app.setLoginEnable(True)
 
