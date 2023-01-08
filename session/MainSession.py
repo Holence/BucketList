@@ -101,7 +101,11 @@ class MainSession(DTSession.DTMainSession):
             Symmetric_Encrypt_Save(self.password(), self.data, data_dir, iteration=self.iteration())
         except Exception as e:
             self.app.showMessage("Error","Error occured during Data Saving!\n\n%s"%e,DTIcon.Error())
-
+    
+    def saveAllEncryptData(self):
+        super().saveAllEncryptData()
+        self.saveData()
+	
     def refresh(self):
         self.mainwindow.initializeWindow(refresh=True)
     
