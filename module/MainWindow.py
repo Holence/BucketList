@@ -350,7 +350,7 @@ class MainWindow(Ui_MainWindow,QWidget):
         url=os.path.abspath("./Export_Data_%s.json"%WhatDayIsToday(1).toString("yyyyMMdd"))
         res=Json_Save(self.Headquarter.data,url)
         if res==True:
-            self.Headquarter.app.showMessage("Information", "Data Export Successfully!", DTIcon.Information(), clicked_slot=lambda:os.popen("explorer /select,\"%s\""%url))
+            self.Headquarter.app.showMessage("Information", "Data Export Successfully!", DTIcon.Information(), clicked_slot=lambda:Open_Explorer(url, True))
         else:
             self.Headquarter.app.showMessage("Error","Error occured during Data Export!",DTIcon.Error())
     
