@@ -22,6 +22,7 @@ class MainSession(DTSession.DTMainSession):
         self.addAction(self.mainwindow.actionAdd_ToDo)
         self.addAction(self.mainwindow.actionExport_to_Json)
         self.addAction(self.mainwindow.actionCheck_Data_Completeness)
+        self.addAction(self.mainwindow.actionCheck_Unsaved_Data)
         self.addAction(self.mainwindow.actionSearch_ToDo)
         
         self.actionSort_list=[
@@ -78,6 +79,7 @@ class MainSession(DTSession.DTMainSession):
         self.menuData=QMenu("Data")
         self.menuData.setIcon(IconFromCurrentTheme("database.svg"))
         self.menuData.addAction(self.mainwindow.actionCheck_Data_Completeness)
+        self.menuData.addAction(self.mainwindow.actionCheck_Unsaved_Data)
         self.menuData.addAction(self.mainwindow.actionExport_to_Json)
         self.addMenuToMainMenu(self.menuData)
 

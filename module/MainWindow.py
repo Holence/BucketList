@@ -62,6 +62,9 @@ class MainWindow(Ui_MainWindow,QWidget):
         self.actionCheck_Data_Completeness.triggered.connect(self.checkDataCompleteness)
         self.actionCheck_Data_Completeness.setIcon(IconFromCurrentTheme("shield.svg"))
 
+        self.actionCheck_Unsaved_Data.triggered.connect(self.checkUnsavedData)
+        self.actionCheck_Unsaved_Data.setIcon(IconFromCurrentTheme("git-pull-request.svg"))
+
         self.actionSearch_ToDo.triggered.connect(self.searchToDo)
         self.actionSearch_ToDo.setIcon(IconFromCurrentTheme("search.svg"))
     
@@ -423,8 +426,10 @@ class MainWindow(Ui_MainWindow,QWidget):
 
             self.DataChecker.actionExit.triggered.disconnect(self.DataChecker.close)
             self.DataChecker.actionExit.triggered.connect(slot)
-            self.DataChecker.TitleBar.btn_close.clicked.disconnect(self.DataChecker.close)
-            self.DataChecker.TitleBar.btn_close.clicked.connect(slot)
+
+            if sys.platform=="win32":
+                self.DataChecker.TitleBar.btn_close.clicked.disconnect(self.DataChecker.close)
+                self.DataChecker.TitleBar.btn_close.clicked.connect(slot)
 
             self.DataChecker.errorText=QPlainTextEdit(error)
             self.DataChecker.errorText.setReadOnly(True)
@@ -434,8 +439,55 @@ class MainWindow(Ui_MainWindow,QWidget):
             MoveToCenterOfScreen(self.DataChecker)
             self.DataChecker.show()
         
-        self.DataChecker.showNormal()
-        self.DataChecker.raise_()
+        ShowUp(self.DataChecker)
+    
+    def checkUnsavedData(self):
+        import deepdiff
+        import pprint
+        
+        def diff(old,new):
+            return pprint.pformat(deepdiff.DeepDiff(old,new),indent=4,compact=True)
+        
+        def check():
+            
+            old_data=Symmetric_Decrypt_Load(self.Headquarter.password(), os.path.join(self.Headquarter.app.DataDir(),"data.dlcw"), iteration=self.Headquarter.iteration())
+            new_data=self.Headquarter.data
+            
+            info=""
+            info="Check Started: %s\n\n"%QLocale().toString(QDateTime().currentDateTime(),"yyyy.M.d hh:mm:ss")
+            info+="----------Data Difference----------\n\n"+diff(old_data,new_data)+"\n\n"
+            info+="\n\nCheck Finished: %s"%QLocale().toString(QDateTime().currentDateTime(),"yyyy.M.d hh:mm:ss")
+            
+            return info
+
+        def slot():
+            self.DataChecker2.deleteLater()
+            del self.DataChecker2
+        
+        info=check()
+        
+        try:
+            self.DataChecker2.infoText.setPlainText(info)
+        except:
+            self.DataChecker2=DTFrame.DTMainWindow(self.Headquarter.app)
+            self.DataChecker2.initialize()
+            self.DataChecker2.setWindowTitle("Check Unsaved Data")
+
+            self.DataChecker2.actionExit.triggered.disconnect(self.DataChecker2.close)
+            self.DataChecker2.actionExit.triggered.connect(slot)
+            
+            if sys.platform=="win32":
+                self.DataChecker2.TitleBar.btn_close.clicked.disconnect(self.DataChecker2.close)
+                self.DataChecker2.TitleBar.btn_close.clicked.connect(slot)
+
+            self.DataChecker2.infoText=QPlainTextEdit(info)
+            self.DataChecker2.infoText.setReadOnly(True)
+            self.DataChecker2.setMinimumSize(500,500)
+            self.DataChecker2.setCentralWidget(self.DataChecker2.infoText)
+            self.DataChecker2.adjustSize()
+            MoveToCenterOfScreen(self.DataChecker2)
+            
+        ShowUp(self.DataChecker2)
     
     def searchToDo(self):
         def slot():

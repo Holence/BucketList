@@ -56,7 +56,7 @@ class Block(Ui_Block,QWidget):
             self.Headquarter.deleteData(self.index)
             
             self.deleteLater()
-            self.Headquarter.mainwindow.refreshTabBar()
+            self.Headquarter.mainwindow.refresh()
 
         widget.deleted.connect(slot)
 

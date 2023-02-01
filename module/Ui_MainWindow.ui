@@ -134,6 +134,17 @@
     <string>Ctrl+F</string>
    </property>
   </action>
+  <action name="actionCheck_Unsaved_Data">
+   <property name="text">
+    <string>Check Unsaved Data</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
